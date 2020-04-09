@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class JschSftpUtil {
 
@@ -258,7 +258,7 @@ public class JschSftpUtil {
 
 /**
  * 用于下载和上传时的进度监控
- * @author shu
+ * @author harvey
  */
 class sftpMonitor extends TimerTask implements SftpProgressMonitor {
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class AliyunCloudServiceImpl implements BaseCloudService {
 

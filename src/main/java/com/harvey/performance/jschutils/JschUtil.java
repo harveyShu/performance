@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class JschUtil {
 

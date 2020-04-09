@@ -5,7 +5,7 @@ import com.aliyuncs.exceptions.ClientException;
 import java.util.List;
 
 /**
- * @author shu
+ * @author harvey
  */
 public interface BaseCloudService {
 

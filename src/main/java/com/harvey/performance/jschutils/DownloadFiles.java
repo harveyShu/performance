@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 import java.util.Collections;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class DownloadFiles {
 

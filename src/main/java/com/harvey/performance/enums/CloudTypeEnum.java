@@ -1,7 +1,7 @@
 package com.harvey.performance.enums;
 
 /**
- * @author shu
+ * @author harvey
  */
 public enum CloudTypeEnum{
 

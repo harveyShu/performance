@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class AliEcsUtils {
 

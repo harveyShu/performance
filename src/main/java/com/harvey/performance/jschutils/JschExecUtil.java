@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class JschExecUtil {
 

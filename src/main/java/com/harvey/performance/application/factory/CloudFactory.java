@@ -6,7 +6,7 @@ import com.harvey.performance.application.interfaces.BaseCloudService;
 import com.harvey.performance.application.service.AliyunCloudServiceImpl;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class CloudFactory {
 

@@ -3,7 +3,7 @@ package com.harvey.performance.enums;
 /**
  * 阿里云实例regionId和launchTemplateId的枚举类
  *
- * @author shu
+ * @author harvey
  */
 public enum RegionEnum{
 

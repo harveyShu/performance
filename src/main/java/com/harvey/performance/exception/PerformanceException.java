@@ -1,7 +1,7 @@
 package com.harvey.performance.exception;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class PerformanceException extends RuntimeException {
 

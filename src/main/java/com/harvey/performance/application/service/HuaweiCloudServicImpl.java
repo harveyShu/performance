@@ -5,7 +5,7 @@ import com.harvey.performance.application.interfaces.BaseCloudService;
 import java.util.List;
 
 /**
- * @author shu
+ * @author harvey
  */
 public class HuaweiCloudServicImpl implements BaseCloudService {
     @Override
