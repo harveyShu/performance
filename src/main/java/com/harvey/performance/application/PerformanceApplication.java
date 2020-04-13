@@ -9,12 +9,13 @@ import com.harvey.performance.jschutils.JschSftpUtil;
 import com.harvey.performance.jschutils.JschUtil;
 import com.jcraft.jsch.*;
 import lombok.Data;
+import org.apache.tools.ant.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.collections.CollectionUtils;
 
 import java.io.File;
-import java.net.URL;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -95,12 +96,12 @@ public class PerformanceApplication {
     /**
      *
      */
-    private String userName = "root";
+    private String userName = "YOUR_SSH_USER_NAME";
 
     /**
      *
      */
-    private String password = "6EV9m2bGrY";
+    private String password = "YOUR_SSH_PASSWORD";
 
     /**
      *
@@ -137,6 +138,7 @@ public class PerformanceApplication {
         Session masterSession = null;
         if (null == masterHost) {
             masterSession = sessionList.get(0);
+            masterHost = sessionList.get(0).getHost();
         } else {
             for (Session session : sessionList) {
                 if (masterHost.equals(session.getHost())) {
@@ -148,7 +150,7 @@ public class PerformanceApplication {
         uploadFiles(masterSession, sessionList, jmxAbsolutePath);
         configureSlave(true, masterSession, sessionList);
         executeCommand(downloadFlag, masterSession);
-        LOG.info("master机IP地址：[{}]", masterSession.getHost());
+        LOG.info("master机IP地址：[{}]", null != masterSession ? masterSession.getHost() : masterHost);
         LOG.info("slave机IP地址如下：");
         for (int i = 1; i < sessionList.size(); i++) {
             System.out.println(sessionList.get(i).getHost());
@@ -187,7 +189,12 @@ public class PerformanceApplication {
         srcList.add(REMOTE_CASE_ROOT + START_TIME + ".tar");
         List<String> dstList = new ArrayList<>();
         dstList.add(reportPath);
-        (new File(reportPath)).mkdirs();
+        FileUtils fileUtils = FileUtils.getFileUtils();
+        try {
+            fileUtils.createNewFile(new File(reportPath),true);
+        } catch (IOException e) {
+            LOG.error("", e);
+        }
         if (JschSftpUtil.downloadFile((ChannelSftp) channel, srcList, dstList, master.getHost())) {
             LOG.info("已成功下载报告文件至\n[{}]\n请前往查看", reportPath);
         }
@@ -416,24 +423,11 @@ public class PerformanceApplication {
      * @return 本地绝对路径
      */
     private String localAbsolutePath(String path) {
-        if ((new File(path)).exists()) {
-            return path;
-        } else {
-            String absolutePath;
-            absolutePath = System.getProperty("user.dir") + RESOURCES_BASE_PATH + path;
-            LOG.info("absolutePath为：[{}]", absolutePath);
-            if ((new File(path)).exists()) {
-                return absolutePath;
-            }
-            URL url = this.getClass().getClassLoader().getResource(path);
-            LOG.info("url为：[{}]", url);
-            if (null != url) {
-                if ((new File(url.getPath()).exists())) {
-                    return url.getPath();
-                }
-            }
-            throw new PerformanceException("jmx文件无法转换为绝对路径");
+        if (FileUtils.isAbsolutePath(path)) {
+            LOG.error("{}路径不存在", path);
+            return null;
         }
+        return path;
     }
 
 }
